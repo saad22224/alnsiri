@@ -15,10 +15,6 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description');
-            $table->unsignedBigInteger('lawyer_id');
-            $table->foreign('lawyer_id')->references('id')->on('lawyer')->onDelete('cascade');
-            $table->unsignedBigInteger('question_id');
-            $table->foreign('question_id')->references('id')->on('question')->onDelete('cascade');
             $table->timestamps();
         });
     }
