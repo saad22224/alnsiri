@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('lawyer_office', function (Blueprint $table) {
             $table->id();
+            $table->string('office_name');
+            $table->string('office_address');
+            $table->string('office_phone');
+            $table->string('office_email');
+            $table->unsignedBigInteger('lawyer_id');
+            $table->foreign('lawyer_id')->references('id')->on('lawyer')->onDelete('cascade');
+            $table->unsignedBigInteger('speciality_id');
+            $table->foreign('speciality_id')->references('id')->on('speciality')->onDelete('cascade');
             $table->timestamps();
         });
     }

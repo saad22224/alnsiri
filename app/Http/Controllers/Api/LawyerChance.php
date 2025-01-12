@@ -10,28 +10,40 @@ class LawyerChanceController extends Controller
 {
     public function createLawyerChance(Request $request)
     {
-        $request->validate([
-            'order_number' => 'required|integer',
-            'case_type' => 'required|string',
-            'case_details' => 'required|string',
-            'speciality' => 'required|string',
-            'city' => 'required|string',
-            'date' => 'required|date',
-            'price' => 'required|integer',
-            'user_id' => 'required|integer',
-        ]);
-        $lawyerChance = LawyerChance::create($request->all());
-        return response()->json($lawyerChance);
+        try {
+            $request->validate([
+                'order_number' => 'required|integer',
+                'case_type' => 'required|string',
+                'case_details' => 'required|string',
+                'speciality' => 'required|string',
+                'city' => 'required|string',
+                'date' => 'required|date',
+                'price' => 'required|integer',
+                'user_id' => 'required|integer',
+            ]);
+            $lawyerChance = LawyerChance::create($request->all());
+            return response()->json($lawyerChance);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to create lawyer chance', 'message' => $e->getMessage()], 500);
+        }
     }
     public function getLawyerChancesByUserId($user_id)
     {
-        $lawyerChances = LawyerChance::where('user_id', $user_id)->get();
-        return response()->json($lawyerChances);
+        try {
+            $lawyerChances = LawyerChance::where('user_id', $user_id)->get();
+            return response()->json($lawyerChances);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to retrieve lawyer chances by user ID', 'message' => $e->getMessage()], 500);
+        }
     }
     public function getLawyerChancesByLawyerId($lawyer_id)
     {
-        $lawyerChances = LawyerChance::where('lawyer_id', $lawyer_id)->get();
-        return response()->json($lawyerChances);
+        try {
+            $lawyerChances = LawyerChance::where('lawyer_id', $lawyer_id)->get();
+            return response()->json($lawyerChances);
+        } catch (\Exception $e) {
+            return response()->json(['error' => 'Failed to retrieve lawyer chances by lawyer ID', 'message' => $e->getMessage()], 500);
+        }
     }
     public function getAllLawyerChances()
     {

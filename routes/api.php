@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\LawyerChanceController;
 use App\Http\Controllers\Api\CheckEmailAuthController;
 use App\Http\Controllers\Api\SpecialityController;
 use App\Http\Controllers\Auth\MultiAuthController;
+use App\Http\Controllers\Api\LawyerOfficeController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -53,6 +54,9 @@ Route::prefix('lawyer')->group(function () {
     Route::get('get-lawyer-chances-by-lawyer-id/{lawyer_id}', [LawyerChanceController::class, 'getLawyerChancesByLawyerId']);
     Route::post('create-lawyer-chance', [LawyerChanceController::class, 'createLawyerChance']);
     Route::get('get-all-lawyer-chances', [LawyerChanceController::class, 'getAllLawyerChances']);
+    Route::post('create-lawyer-office', [LawyerOfficeController::class, 'createLawyerOffice']);
+    Route::get('get-all-lawyer-offices', [LawyerOfficeController::class, 'getAllLawyerOffices']);
+    Route::get('get-lawyer-office-by-id/{id}', [LawyerOfficeController::class, 'getLawyerOfficeById']);
 });
 
 Route::prefix('question')->group(function () {

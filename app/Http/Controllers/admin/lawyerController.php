@@ -3,19 +3,23 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Models\Lawyer;
 use Illuminate\Http\Request;
 
-class clientsController extends Controller
+class lawyerController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $clients  = User::paginate(10);
-        return view('admin.clients', compact('clients'));
+        $lawyers = Lawyer::paginate('10');
+
+       return view('admin.lawyers' , compact('lawyers'));
+
     }
+
+
 
     /**
      * Show the form for creating a new resource.
@@ -54,22 +58,21 @@ class clientsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $client = User::findOrFail($id);
+        $lawyer = Lawyer::findOrFail($id);
         try {
             // التحقق من حالة المستخدم وتحديثها
-            if ($client->status == 1) {
-                $client->update(['status' => 0]); // تغيير الحالة إلى غير نشط
-                return redirect()->back()->with('success', 'User deactivated successfully.');
+            if ($lawyer->status == 1) {
+                $lawyer->update(['status' => 0]); // تغيير الحالة إلى غير نشط
+                return redirect()->back()->with('success', 'lawyer deactivated successfully.');
             } else {
-                $client->update(['status' => 1]); // تغيير الحالة إلى نشط
-                return redirect()->back()->with('success', 'User activated successfully.');
+                $lawyer->update(['status' => 1]); // تغيير الحالة إلى نشط
+                return redirect()->back()->with('success', 'lawyer activated successfully.');
             }
         } catch (\Exception $e) {
             // في حال وجود خطأ أثناء التحديث
             return redirect()->back()->with('failed', 'Error: ' . $e->getMessage());
         }
     }
-
 
     /**
      * Remove the specified resource from storage.

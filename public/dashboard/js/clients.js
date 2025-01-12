@@ -50,3 +50,42 @@ function toggleStatus(id) {
     }
 }
 
+   // دالة عرض التفاصيل
+   function showClientDetails(id) {
+    const clientModal = document.getElementById(`clientModal${id}`);
+    const modalContent = document.getElementById(`modalContent${id}`);
+
+    // إظهار الـ Modal فقط للـ client الذي تم اختياره
+    if (clientModal) {
+        clientModal.classList.remove('hidden');
+    }
+
+    // إرسال الـ ID إلى الخادم (يمكنك استخدام fetch أو axios هنا)
+    sendIdToServer(id);
+}
+
+// دالة إغلاق الـ Modal
+function closeModal(id) {
+    const clientModal = document.getElementById(`clientModal${id}`);
+    if (clientModal) {
+        clientModal.classList.add('hidden'); // إخفاء الـ Modal
+    }
+}
+
+// دالة لإرسال الـ ID إلى الخادم (اختياري)
+function sendIdToServer(id) {
+    // هنا يمكنك إرسال البيانات إلى الخادم باستخدام fetch أو axios
+    console.log("إرسال الـ ID إلى الخادم: ", id);
+}
+
+
+
+$(document).ready(function(){
+    // حدث عند كتابة شيء في خانة البحث
+    $('#search').on('keyup', function() {
+        var value = $(this).val().toLowerCase();  // الحصول على النص المدخل وتحويله لحروف صغيرة
+        $('#myTable tbody tr').filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)  // تصفية الصفوف بناءً على النص
+        });
+    });
+});

@@ -1,4 +1,24 @@
-    <!-- Sidebar (icons-only) -->
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lawyers Data</title>
+    <link
+        href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+        rel="stylesheet" />
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+        rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+</head>
+
+<body class="font-['IBM_Plex_Sans_Arabic'] bg-gray-100">
+
+   <!-- Sidebar (icons-only) -->
     <div
       class="fixed inset-y-0 right-0 bg-gray-800 w-16 hidden md:flex flex-col items-center py-4 space-y-4"
     >
@@ -52,7 +72,7 @@
             <span>الرئيسية</span>
           </a>
           <a
-            href="/lawyers.html"
+            href="{{route('lawyers.index')}}"
             class="flex gap-2 items-center hover:bg-gray-700 px-4 py-2 rounded"
           >
             <i class="fas fa-balance-scale"></i>
@@ -118,3 +138,6 @@
         <p class="text-white text-lg font-bold">مرحباً بك أحمد 👋</p>
       </div>
     </div>
+
+
+
