@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Questions Data</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="font-['IBM_Plex_Sans_Arabic'] bg-gray-100">
+    <!-- Sidebar (icons-only) -->
+    <div
+      id="iconsSidebar"
+      class="fixed inset-y-0 right-0 bg-gray-800 w-16 hidden md:flex flex-col items-center py-4 space-y-4"
+    >
+      <a href="/" class="text-white hover:text-gray-300 p-2">
+        <i class="fas fa-home text-xl"></i>
+      </a>
+      <a href="/lawyers" class="text-white hover:text-gray-300 p-2">
+        <i class="fas fa-balance-scale text-xl"></i>
+      </a>
+      <a href="/clients" class="text-white hover:text-gray-300 p-2">
+        <i class="fas fa-user-tie text-xl"></i>
+      </a>
+      <a href="/blogs" class="text-white hover:text-gray-300 p-2">
+        <i class="fas fa-blog text-xl"></i>
+      </a>
+      <a href="/questions" class="text-white hover:text-gray-300 p-2">
+        <i class="fas fa-question text-xl"></i>
+      </a>
+      <a href="/leads" class="text-white hover:text-gray-300 p-2">
+        <i class="fas fa-lightbulb text-xl"></i>
+      </a>
+      <a href="/login" class="text-white hover:text-gray-300 p-2">
+        <i class="fas fa-sign-in-alt text-xl"></i>
+      </a>
+      <a href="/register" class="text-white hover:text-gray-300 p-2">
+        <i class="fas fa-user-plus text-xl"></i>
+      </a>
+    </div>
+
+    <!-- Full Sidebar -->
+    <div
+      id="fullSidebar"
+      class="fixed inset-y-0 right-0 bg-gray-800 text-white w-64 lg:w-72 p-4 transform translate-x-full transition-transform duration-300 z-20"
+    >
+      <!-- Close Button -->
+      <button
+        id="closeSidebar"
+        class="text-gray-400 focus:outline-none focus:text-white absolute top-4 left-4"
+      >
+        ✖
+      </button>
+
+      <div class="mt-4">
+        <h1 class="text-2xl font-bold mb-6">لوحة التحكم</h1>
+        <nav class="space-y-4">
+          <a
+            href="/"
+            class="flex gap-2 items-center hover:bg-gray-700 px-4 py-2 rounded"
+          >
+            <i class="fas fa-home"></i>
+            <span>الرئيسية</span>
+          </a>
+          <a
+            href="/lawyers"
+            class="flex gap-2 items-center hover:bg-gray-700 px-4 py-2 rounded"
+          >
+            <i class="fas fa-balance-scale"></i>
+            <span>المحامين</span>
+          </a>
+          <a
+            href="/clients"
+            class="flex gap-2 items-center hover:bg-gray-700 px-4 py-2 rounded"
+          >
+            <i class="fas fa-user-tie"></i>
+            <span>العملاء</span>
+          </a>
+          <a
+            href="/blogs"
+            class="flex gap-2 items-center hover:bg-gray-700 px-4 py-2 rounded"
+          >
+            <i class="fas fa-blog"></i>
+            <span>المدونات</span>
+          </a>
+          <a
+            href="/questions"
+            class="flex gap-2 items-center hover:bg-gray-700 px-4 py-2 rounded"
+          >
+            <i class="fas fa-question"></i>
+            <span>الاسئله</span>
+          </a>
+          <a
+            href="/leads"
+            class="flex gap-2 items-center hover:bg-gray-700 px-4 py-2 rounded"
+          >
+            <i class="fas fa-lightbulb"></i>
+            <span>الفرص</span>
+          </a>
+          <a
+            href="/login"
+            class="flex gap-2 items-center hover:bg-gray-700 px-4 py-2 rounded"
+          >
+            <i class="fas fa-sign-in-alt"></i>
+            <span>تسجيل الدخول</span>
+          </a>
+          <a
+            href="/register"
+            class="flex gap-2 items-center hover:bg-gray-700 px-4 py-2 rounded"
+          >
+            <i class="fas fa-user-plus"></i>
+            <span>تسجيل جديد</span>
+          </a>
+        </nav>
+      </div>
+    </div>
+
+    <!-- Header Content -->
+    <div class="flex items-center p-4 gap-5 md:mr-16">
+      <div>
+        <button
+          id="toggleSidebar"
+          class="p-2 bg-gray-800 text-white rounded focus:outline-none"
+        >
+          ☰
+        </button>
+      </div>
+      <div class="bg-blue-500 px-2 py-2 rounded">
+        <p class="text-white text-lg font-bold">مرحباً بك أحمد 👋</p>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="rtl p-2 md:pr-24 md:pl-6 lg:px-28">
+      <!-- Loading Spinner -->
+      <div
+        id="loading"
+        class="fixed inset-0 flex items-center justify-center bg-white bg-opacity-75 z-50"
+      >
+        <div class="text-center">
+          <div
+            class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"
+          ></div>
+          <p class="mt-2 text-gray-600">جاري التحميل...</p>
+        </div>
+      </div>
+
+      <!-- Questions Count Card -->
+      <div class="mb-4 bg-white shadow-sm rounded-lg p-4">
+        <div class="flex items-center gap-3">
+          <div class="p-3 bg-blue-100 rounded-full">
+            <i class="fas fa-question text-blue-600 text-xl"></i>
+          </div>
+          <div>
+            <p class="text-gray-600">إجمالي الأسئلة</p>
+            <h2 id="totalQuestions" class="text-2xl font-bold">0</h2>
+          </div>
+        </div>
+      </div>
+
+      <!-- Search Input -->
+      <div class="mb-4">
+        <input
+          id="searchInput"
+          type="text"
+          placeholder="البحث في جميع الحقول"
+          class="w-full md:w-64 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+        />
+      </div>
+
+      <!-- Questions Table -->
+      <div class="overflow-x-auto">
+        <table id="questionsTable" class="w-full whitespace-nowrap">
+          <thead>
+            <tr class="bg-gray-100">
+              <th class="p-2">رقم السؤال</th>
+              <th class="p-2">السائل</th>
+              <th class="p-2">المجيب</th>
+              <th class="p-2">تاريخ السؤال</th>
+              <th class="p-2">تاريخ الإجابة</th>
+              <th class="p-2">التخصص</th>
+              <th class="p-2">الحالة</th>
+              <th class="p-2">الإجراءات</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody" class="text-sm">
+            <!-- Rows will be populated by JavaScript -->
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Question Details Modal -->
+      <div
+        id="questionModal"
+        class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50"
+      >
+        <div
+          class="bg-white mx-auto md:mt-10 rounded-lg w-11/12 md:w-3/4 lg:w-2/3 p-6"
+        >
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold">تفاصيل السؤال</h2>
+            <button id="closeModal" class="text-gray-500 hover:text-gray-700">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <div id="modalContent" class="space-y-4">
+            <!-- Modal content will be populated by JavaScript -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Question Modal -->
+      <div
+        id="editModal"
+        class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50"
+      >
+        <div
+          class="bg-white mx-auto md:mt-10 rounded-lg w-11/12 md:w-3/4 lg:w-2/3 p-6"
+        >
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold">تعديل السؤال</h2>
+            <button id="closeEditModal" class="text-gray-500 hover:text-gray-700">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <form id="editForm" class="space-y-4">
+            <div>
+              <label class="block text-gray-700 mb-2">السؤال</label>
+              <textarea
+                id="editQuestion"
+                class="w-full p-2 border rounded-md"
+                rows="4"
+              ></textarea>
+            </div>
+            <div>
+              <label class="block text-gray-700 mb-2">الإجابة</label>
+              <textarea
+                id="editAnswer"
+                class="w-full p-2 border rounded-md"
+                rows="4"
+              ></textarea>
+            </div>
+            <div>
+              <label class="block text-gray-700 mb-2">التخصص</label>
+              <input
+                id="editSpecialty"
+                type="text"
+                class="w-full p-2 border rounded-md"
+              />
+            </div>
+            <div class="flex justify-end gap-2">
+              <button
+                type="button"
+                id="cancelEdit"
+                class="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors"
+              >
+                إلغاء
+              </button>
+              <button
+                type="submit"
+                class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+              >
+                حفظ التغييرات
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <!-- Delete Confirmation Modal -->
+      <div
+        id="deleteModal"
+        class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50"
+      >
+        <div
+          class="bg-white mx-auto md:mt-10 rounded-lg w-11/12 md:w-3/4 lg:w-2/3 p-6"
+        >
+          <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold">حذف السؤال</h2>
+            <button id="closeDeleteModal" class="text-gray-500 hover:text-gray-700">
+              <i class="fas fa-times"></i>
+            </button>
+          </div>
+          <p>هل أنت متأكد من حذف هذا السؤال؟</p>
+          <div class="flex justify-end gap-2 mt-4">
+            <button
+              type="button"
+              id="cancelDelete"
+              class="px-4 py-2 bg-gray-200 rounded-md hover:bg-gray-300 transition-colors"
+            >
+              إلغاء
+            </button>
+            <button
+              type="button"
+              id="confirmDelete"
+              class="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600 transition-colors"
+            >
+              حذف
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Include JavaScript -->
+    <script src="questions.js"></script>
+  </body>
+</html>

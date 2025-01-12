@@ -1,0 +1,16 @@
+
+  Client ID ........................................................................................................ 1
+  Client secret ............................................................. 1u3xsRAUSdcVPefocUonAToMHLEvmvHdRZ5PKUes
+
+   INFO  Password grant client created successfully.
+
+  Client ID ........................................................................................................ 2
+  Client secret ............................................................. rca6XIAZg5fB8jFogFVYybCp3VaylXkLMDhgtqT6
+
+
+
+
+
+
+
+SMS Service = $2y$10$V9kn4yCogP.S4HKHe5c6zekSaXIdV7b8ogZCgZ9wjyZr2/xld5ce6
