@@ -11,12 +11,15 @@ class LawyerOfficeController extends Controller
     public function createLawyerOffice(Request $request)
     {
         $request->validate([
-            'office_name' => 'required|string',
-            'office_address' => 'required|string',
-            'office_phone' => 'required|string',
-            'office_email' => 'required|email',
-            'lawyer_id' => 'required|exists:lawyer,id',
+            'lawyer_uuid' => 'required|exists:lawyer,uuid',
             'speciality_id' => 'required|exists:speciality,id',
+            'google_map_url' => 'nullable|string',
+            'law_office' => 'nullable|string',
+            'call_number' => 'nullable|string',
+            'whatsapp_number' => 'nullable|string',
+            'specialties' => 'nullable|array',
+            'speaking_english' => 'nullable|boolean',
+
         ]);
         $lawyerOffice = LawyerOffice::create($request->all());
         return response()->json($lawyerOffice, 201);

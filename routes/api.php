@@ -51,7 +51,7 @@ Route::prefix('lawyer')->group(function () {
     Route::get('get-lawyer-rate-by-lawyer-id/{lawyer_id}', [LaweyrRateController::class, 'getLawyerRateByLawyerId']);
     Route::get('get-all-rates', [LaweyrRateController::class, 'getAllRates']);
     Route::get('get-lawyer-chances-by-user-id/{user_id}', [LawyerChanceController::class, 'getLawyerChancesByUserId']);
-    Route::get('get-lawyer-chances-by-lawyer-id/{lawyer_id}', [LawyerChanceController::class, 'getLawyerChancesByLawyerId']);
+    Route::get('get-lawyer-chances-by-lawyer-uuid/{lawyer_uuid}', [LawyerChanceController::class, 'getLawyerChancesByLawyerUUID']);
     Route::post('create-lawyer-chance', [LawyerChanceController::class, 'createLawyerChance']);
     Route::get('get-all-lawyer-chances', [LawyerChanceController::class, 'getAllLawyerChances']);
     Route::post('create-lawyer-office', [LawyerOfficeController::class, 'createLawyerOffice']);
@@ -62,6 +62,8 @@ Route::prefix('lawyer')->group(function () {
 Route::prefix('question')->group(function () {
     Route::post('create', [QuestionController::class, 'createQuestion']);
     Route::get('index', [QuestionController::class, 'index']);
+    Route::get('mix', [QuestionController::class, 'mix']);
+
     Route::get('get-question-by-id/{id}', [QuestionController::class, 'getQuestionById']);
     Route::put('update/{id}', [QuestionController::class, 'updateQuestion']);
     Route::delete('delete/{id}', [QuestionController::class, 'deleteQuestion']);

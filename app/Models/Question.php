@@ -9,7 +9,7 @@ class Question extends Model
 {
     use HasFactory;
     protected $table = 'question';
-    protected $fillable = ['question_title', 'question_content', 'question_city', 'question_status', 'contact_method', 'case_specialization', 'user_id'];
+    protected $fillable = ['user_id','question_title', 'question_content', 'question_city', 'question_status', 'contact_method', 'case_specialization',  'question_time'];
     public function lawyer()
     {
         return $this->belongsTo(Lawyer::class);

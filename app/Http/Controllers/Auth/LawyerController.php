@@ -57,7 +57,8 @@ class LawyerController extends Controller
             return response()->json([
                 'message' => 'User registered successfully',
                 'data' => $lawyer,
-                'token' => $token
+                'token' => $token,
+                'user_type' => 'lawyer'
             ]);
 
         } catch (\Exception $e) {

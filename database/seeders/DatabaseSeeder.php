@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(AdminSeeder::class);
         $this->call(lawyerSeeder::class);
         $this->call(UserSeeder::class);
-
+        $this->call(Speciality::class);
     }
 
 
