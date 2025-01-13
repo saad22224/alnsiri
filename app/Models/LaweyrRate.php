@@ -11,7 +11,7 @@ class LaweyrRate extends Model
 {
     use HasFactory;
     protected $table = 'lawyer_rate';
-    protected $fillable = ['rate_count', 'rate_value', 'lawyer_id', 'user_id'];
+    protected $fillable = ['rate_count', 'rate_content', 'lawyer_id', 'user_id'];
     public function lawyer()
     {
         return $this->belongsTo(Lawyer::class);
