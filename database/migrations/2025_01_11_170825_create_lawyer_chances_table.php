@@ -20,8 +20,7 @@ return new class extends Migration
             $table->date('date');
             $table->integer('price');
             $table->string('status')->default(1);
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->uuid('user_uuid')->references('uuid')->on('users')->onDelete('cascade');
             $table->uuid('lawyer_uuid')->references('uuid')->on('lawyer')->onDelete('cascade');
             $table->timestamps();
         });

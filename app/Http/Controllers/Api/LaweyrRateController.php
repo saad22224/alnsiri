@@ -23,12 +23,12 @@ class LaweyrRateController extends Controller
         $request->validate([
             'rate_count' => 'required|integer',
             'rate_content' => 'required|string',
-            'lawyer_id' => 'required|integer',
-            'user_id' => 'required|integer',
+            'lawyer_uuid' => 'required|exists:lawyer,uuid',
+            'user_uuid' => 'required|exists:users,uuid',
         ]);
         $lawyerRate = LaweyrRate::create($request->all());
-        $lawyer = Lawyer::find($request->lawyer_id);
-        $user = User::find($request->user_id);
+        $lawyer = Lawyer::where('uuid', $request->lawyer_uuid)->first();
+        $user = User::where('uuid', $request->user_uuid)->first();
         return response()->json([
             'lawyerRate' => $lawyerRate,
             'lawyer_name' => $lawyer->first_name . ' ' . $lawyer->last_name,
@@ -36,6 +36,11 @@ class LaweyrRateController extends Controller
             'lawyer_rate_content' => $lawyerRate->rate_content,
             'user_name' => $user->name
         ]);
+    }
+    public function getLawyerRateByLawyerUUID($lawyer_uuid)
+    {
+        $lawyerRate = LaweyrRate::where('lawyer_uuid', $lawyer_uuid)->get();
+        return response()->json($lawyerRate);
     }
 
 

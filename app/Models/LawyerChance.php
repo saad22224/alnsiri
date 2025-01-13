@@ -9,7 +9,7 @@ class LawyerChance extends Model
 {
     use HasFactory;
     protected $table = 'lawyer_chances';
-    protected $fillable = ['order_number', 'case_type', 'case_details', 'speciality', 'city', 'date', 'price', 'status', 'user_id', 'lawyer_uuid'];
+    protected $fillable = ['order_number', 'case_type', 'case_details', 'speciality', 'city', 'date', 'price', 'status', 'user_uuid', 'lawyer_uuid'];
     public function user()
     {
         return $this->belongsTo(User::class);

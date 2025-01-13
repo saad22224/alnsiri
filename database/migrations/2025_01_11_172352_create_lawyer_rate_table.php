@@ -14,10 +14,8 @@ return new class extends Migration
         Schema::create('lawyer_rate', function (Blueprint $table) {
             $table->id();
             $table->integer('rate_count');
-            $table->unsignedBigInteger('lawyer_id');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('lawyer_id')->references('id')->on('lawyer')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->uuid('lawyer_uuid')->references('uuid')->on('lawyer')->onDelete('cascade');
+            $table->uuid('user_uuid')->references('uuid')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }

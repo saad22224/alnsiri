@@ -48,9 +48,9 @@ Route::prefix('lawyer')->group(function () {
     Route::post('login-with-otp', [OtpAuthVerify::class, 'loginWithOtp']);
     // Route::get('check-email', [CheckEmailLawyer::class, 'checkEmail']);
     Route::post('create-lawyer-rate', [LaweyrRateController::class, 'createLawyerRate']);
-    Route::get('get-lawyer-rate-by-lawyer-id/{lawyer_id}', [LaweyrRateController::class, 'getLawyerRateByLawyerId']);
+    Route::get('get-lawyer-rate-by-lawyer-uuid/{lawyer_uuid}', [LaweyrRateController::class, 'getLawyerRateByLawyerUUID']);
     Route::get('get-all-rates', [LaweyrRateController::class, 'getAllRates']);
-    Route::get('get-lawyer-chances-by-user-id/{user_id}', [LawyerChanceController::class, 'getLawyerChancesByUserId']);
+    Route::get('get-lawyer-chances-by-user-uuid/{user_uuid}', [LawyerChanceController::class, 'getLawyerChancesByUserUUID']);
     Route::get('get-lawyer-chances-by-lawyer-uuid/{lawyer_uuid}', [LawyerChanceController::class, 'getLawyerChancesByLawyerUUID']);
     Route::post('create-lawyer-chance', [LawyerChanceController::class, 'createLawyerChance']);
     Route::get('get-all-lawyer-chances', [LawyerChanceController::class, 'getAllLawyerChances']);
@@ -65,12 +65,12 @@ Route::prefix('question')->group(function () {
     Route::get('index', [QuestionController::class, 'index']);
     Route::get('mix', [QuestionController::class, 'mix']);
 
-    Route::get('get-question-by-id/{id}', [QuestionController::class, 'getQuestionById']);
-    Route::put('update/{id}', [QuestionController::class, 'updateQuestion']);
-    Route::delete('delete/{id}', [QuestionController::class, 'deleteQuestion']);
-    Route::get('get-questions-by-user-id/{user_id}', [QuestionController::class, 'getQuestionsByUserId']);
+    Route::get('get-question-by-uuid/{uuid}', [QuestionController::class, 'getQuestionByUUID']);
+    Route::put('update/{uuid}', [QuestionController::class, 'updateQuestion']);
+    Route::delete('delete/{uuid}', [QuestionController::class, 'deleteQuestion']);
+    Route::get('get-questions-by-user-uuid/{user_uuid}', [QuestionController::class, 'getQuestionsByUserUUID']);
 });
 Route::prefix('answers')->group(function(){
     Route::post('store', [LaweyrAnswerController::class, 'store']);
-    Route::get('get-answers-by-lawyer-id/{lawyer_id}', [LaweyrAnswerController::class, 'getAnswersByLawyerId']);
+    Route::get('get-answers-by-lawyer-uuid/{lawyer_uuid}', [LaweyrAnswerController::class, 'getAnswersByLawyerUUID']);
 });

@@ -10,13 +10,13 @@ class Lawyer_answers extends Model
 {
     use HasFactory;
     protected $table = 'lawyer_answers';
-    protected $fillable = ['question_id', 'answer', 'lawyer_id'];
+    protected $fillable = ['question_uuid', 'answer', 'lawyer_uuid'];
     public function question()
     {
-        return $this->belongsTo(Question::class);
+        return $this->belongsTo(Question::class , 'uuid', 'question_uuid');
     }
     public function lawyer()
     {
-        return $this->belongsTo(Lawyer::class);
+        return $this->belongsTo(Lawyer::class , 'uuid', 'lawyer_uuid');
     }
 }

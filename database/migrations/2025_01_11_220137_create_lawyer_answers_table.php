@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('lawyer_answers', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('question_id')->constrained('question');
+            $table->uuid('question_uuid')->constrained('question');
             $table->text('answer');
-            $table->foreignId('lawyer_id')->constrained('lawyer');
+            $table->uuid('lawyer_uuid')->constrained('lawyer')->onDelete('cascade');
             $table->timestamps();
         });
     }

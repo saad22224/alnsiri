@@ -45,7 +45,7 @@ class QuestionController extends Controller
     public function createQuestion(Request $request)
     {
         $request->validate([
-            'user_id' => 'required|exists:users,id',
+            'user_uuid' => 'required|exists:users,uuid',
             'question_title' => 'required|string',
             'question_content' => 'required|string',
             'question_city' => 'required|string',
@@ -60,9 +60,9 @@ class QuestionController extends Controller
             'question' => $question
         ], 201);
     }
-    public function getQuestionById($id)
+    public function getQuestionByUUID($uuid)
     {
-        $question = Question::find($id);
+        $question = Question::where('uuid', $uuid)->first();
 
         if (!$question) {
             return response()->json(['error' => 'Question not found'], 404);
@@ -70,9 +70,9 @@ class QuestionController extends Controller
 
         return response()->json($question);
     }
-    public function updateQuestion(Request $request, $id)
+    public function updateQuestion(Request $request, $uuid)
     {
-        $question = Question::where('id', $id)->where('user_id', $request->user_id)->first();
+        $question = Question::where('uuid', $uuid)->where('user_uuid', $request->user_uuid)->first();
 
         $this->authorize('update', $question);
 
@@ -82,9 +82,13 @@ class QuestionController extends Controller
             'question' => $question
         ], 200);
     }
-    public function deleteQuestion(Request $request, $id)
+    public function deleteQuestion(Request $request, $uuid)
     {
-        $question = Question::where('id', $id)->where('user_id', $request->user_id)->first();
+        $request->validate([
+            'user_uuid' => 'required|exists:users,uuid',
+        ]);
+        $question = Question::where('uuid', $uuid)->where('user_uuid', $request->user_uuid)->first();
+        $this->authorize('delete', $question);
         if ($question) {
             $question->delete();
             return response()->json(['message' => 'Question deleted successfully']);
@@ -92,10 +96,10 @@ class QuestionController extends Controller
             return response()->json(['error' => 'Question not found or you do not have permission to delete this question'], 404);
         }
     }
-public function getQuestionsByUserId($user_id)
+public function getQuestionsByUserUUID($user_uuid)
 {
     try {
-        $questions = Question::where('user_id', $user_id)->get();
+        $questions = Question::where('user_uuid', $user_uuid)->get();
 
         if ($questions->isEmpty()) {
             return response()->json(['error' => 'No questions found for this user'], 404);
@@ -113,7 +117,7 @@ public function getQuestionsByUserId($user_id)
             ]
         ]);
     } catch (\Exception $e) {
-        return response()->json(['error' => 'An error occurred while fetching the questions'], 500);
+        return response()->json(['error' => 'An error occurred while fetching the questions', 'message' => $e->getMessage()], 500);
     }
 }
 }

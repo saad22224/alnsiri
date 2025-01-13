@@ -18,15 +18,15 @@ class LawyerChanceController extends Controller
             'city' => 'required|string',
             'date' => 'required|date',
             'price' => 'required|integer',
-            'user_id' => 'required|integer',
+            'user_uuid' => 'required|exists:users,uuid',
             'lawyer_uuid' => 'required|exists:lawyer,uuid',
         ]);
         $lawyerChance = LawyerChance::create($request->all());
         return response()->json($lawyerChance);
     }
-    public function getLawyerChancesByUserId($user_id)
+    public function getLawyerChancesByUserUUID($user_uuid)
     {
-        $lawyerChances = LawyerChance::where('user_id', $user_id)->get();
+        $lawyerChances = LawyerChance::where('user_uuid', $user_uuid)->get();
         return response()->json($lawyerChances);
     }
     public function getLawyerChancesByLawyerUUID($lawyer_uuid)

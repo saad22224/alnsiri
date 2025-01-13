@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('question', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->uuid('uuid')->unique();
+            $table->uuid('user_uuid')->constrained('users')->onDelete('cascade');
             $table->string('question_title');
             $table->text('question_content');
             $table->string('question_city');
