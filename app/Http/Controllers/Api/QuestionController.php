@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Question;
+use App\Models\LawyerChance;
 class QuestionController extends Controller
 {
     public function index()
@@ -16,16 +17,42 @@ class QuestionController extends Controller
             return response()->json(['error' => 'Failed to retrieve questions', 'message' => $e->getMessage()], 500);
         }
     }
+    public function mix()
+    {
+        try {
+            // Retrieve all records and append a type attribute
+            $questions = Question::all()->map(function ($item) {
+                return array_merge($item->toArray(), ['type' => 'question']); // Convert to array and add type
+            });
+    
+            $chances = LawyerChance::all()->map(function ($item) {
+                return array_merge($item->toArray(), ['type' => 'chance']); // Convert to array and add type
+            });
+    
+            // Merge and shuffle all records
+            $combined = collect($questions)->merge($chances)->shuffle();
+    
+            // Return the randomized combined data
+            return response()->json($combined);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Failed to retrieve data',
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+    
     public function createQuestion(Request $request)
     {
         $request->validate([
+            'user_id' => 'required|exists:users,id',
             'question_title' => 'required|string',
             'question_content' => 'required|string',
             'question_city' => 'required|string',
             'question_status' => 'required|string',
-            'contact_method' => 'required|string',
             'case_specialization' => 'required|string',
-            'user_id' => 'required|exists:users,id',
+            'contact_method' => 'nullable|string',
+            'question_time' => 'nullable|string',
         ]);
         $question = Question::create($request->all());
         return response()->json([

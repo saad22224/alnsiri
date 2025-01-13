@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('question', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('question_title');
             $table->text('question_content');
             $table->string('question_city');
             $table->string('question_status');
-            $table->string('contact_method')->default('email');
             $table->string('case_specialization');
-            $table->unsignedBigInteger('user_id');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('question_time')->nullable();
+            $table->string('contact_method')->nullable();
             $table->timestamps();
         });
     }

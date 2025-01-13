@@ -22,8 +22,7 @@ return new class extends Migration
             $table->string('status')->default(1);
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->unsignedBigInteger('lawyer_id');
-            $table->foreign('lawyer_id')->references('id')->on('lawyer')->onDelete('cascade');
+            $table->uuid('lawyer_uuid')->references('uuid')->on('lawyer')->onDelete('cascade');
             $table->timestamps();
         });
     }
