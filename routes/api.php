@@ -28,11 +28,11 @@ use App\Http\Controllers\Api\LawyerOfficeController;
 Route::post('/login', [MultiAuthController::class, 'login']);
 Route::prefix('user')->group(function () {
     Route::post('register', [UserController::class, 'register']);
-    Route::post('login', [UserController::class, 'login']);
+    // Route::post('login', [UserController::class, 'login']);
     Route::post('logout', [UserController::class, 'logout']);
     Route::post('update-profile', [UserController::class, 'updateProfile']);
     Route::get('get-profile', [UserController::class, 'getProfile']);
-    Route::get('check-email', [CheckEmailUser::class, 'checkEmail']);
+    // Route::get('check-email', [CheckEmailUser::class, 'checkEmail']);
 });
 
 Route::prefix('check-email')->group(function () {
@@ -41,12 +41,12 @@ Route::prefix('check-email')->group(function () {
 
 Route::prefix('lawyer')->group(function () {
     Route::post('register', [LawyerController::class, 'register']);
-    Route::post('login', [LawyerController::class, 'login']);
+    // Route::post('login', [LawyerController::class, 'login']);
     Route::post('edit', [LawyerController::class, 'edit']);
     Route::post('verify-otp', [OtpAuthVerify::class, 'verifyOtp']);
     Route::post('send-otp', [OtpAuthVerify::class, 'sendOtp']);
     Route::post('login-with-otp', [OtpAuthVerify::class, 'loginWithOtp']);
-    Route::get('check-email', [CheckEmailLawyer::class, 'checkEmail']);
+    // Route::get('check-email', [CheckEmailLawyer::class, 'checkEmail']);
     Route::post('create-lawyer-rate', [LaweyrRateController::class, 'createLawyerRate']);
     Route::get('get-lawyer-rate-by-lawyer-id/{lawyer_id}', [LaweyrRateController::class, 'getLawyerRateByLawyerId']);
     Route::get('get-all-rates', [LaweyrRateController::class, 'getAllRates']);
@@ -58,6 +58,7 @@ Route::prefix('lawyer')->group(function () {
     Route::get('get-all-lawyer-offices', [LawyerOfficeController::class, 'getAllLawyerOffices']);
     Route::get('get-lawyer-office-by-id/{id}', [LawyerOfficeController::class, 'getLawyerOfficeById']);
 });
+
 
 Route::prefix('question')->group(function () {
     Route::post('create', [QuestionController::class, 'createQuestion']);
