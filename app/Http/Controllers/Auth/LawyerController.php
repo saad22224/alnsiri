@@ -58,7 +58,8 @@ class LawyerController extends Controller
                 'message' => 'User registered successfully',
                 'data' => $lawyer,
                 'token' => $token,
-                'user_type' => 'lawyer'
+                'user_type' => 'lawyer',
+                'uuid' => $lawyer->uuid
             ]);
 
         } catch (\Exception $e) {
@@ -97,7 +98,8 @@ class LawyerController extends Controller
     return response()->json([
         'message' => 'Login successful',
         'token' => $lawyer->remember_token,
-        'data' => $lawyer
+        'data' => $lawyer,
+        'uuid' => $lawyer->uuid
     ]);
 }
     public function edit(Request $request)
