@@ -53,4 +53,13 @@ class User extends Authenticatable
             $model->uuid = Str::uuid();
         });
     }
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class , 'user_uuid', 'uuid');
+    }
+    public function chances()
+    {
+        return $this->hasMany(LawyerChance::class , 'user_uuid', 'uuid');
+    }
 }

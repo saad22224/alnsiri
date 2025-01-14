@@ -16,35 +16,35 @@
         </div>
     </div>
     @if (session('success'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Toastify({
-                    text: "{{ session('success') }}",
-                    className: "info",
-                    style: {
-                        background: "linear-gradient(to right, #00b09b, #96c93d)",
-                    }
-                }).showToast();
-            });
-        </script>
-        @endif
-        @if (session('failed'))
-        <script>
-            document.addEventListener('DOMContentLoaded', function() {
-                Toastify({
-                    text: "{{ session('failed') }}",
-                    className: "info",
-                    style: {
-                        background: "linear-gradient(to right, #00b09b, #96c93d)",
-                    }
-                }).showToast();
-            });
-        </script>
-        @endif
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Toastify({
+                text: "{{ session('success') }}",
+                className: "info",
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }
+            }).showToast();
+        });
+    </script>
+    @endif
+    @if (session('failed'))
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            Toastify({
+                text: "{{ session('failed') }}",
+                className: "info",
+                style: {
+                    background: "linear-gradient(to right, #00b09b, #96c93d)",
+                }
+            }).showToast();
+        });
+    </script>
+    @endif
     <!-- Search Input -->
     <div class="mb-4">
         <input
-        id="search"
+            id="search"
             type="text"
             placeholder="البحث في جميع الحقول"
             class="w-full md:w-64 p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
@@ -74,21 +74,19 @@
                     <td class="p-2 name">{{ $client->name }}</td>
                     <td class="p-2 phone">{{ $client->phone }}</td>
                     <td class="p-2 truncate email max-w-[200px]">{{ $client->email }}</td>
-                    <td class="p-2">
-                        <div class="bg-gray-50 p-1 rounded text-sm truncate max-w-[300px] mb-1">
-                            1. كيف يمكنني تحسين أداء شركتي؟
-                        </div>
-                        <div class="bg-gray-50 p-1 rounded text-sm truncate max-w-[300px] mb-1">
-                            2. ما هي أفضل طرق التسويق؟
-                        </div>
+                    <td>
+                        <ul>
+                            @foreach ($client->questions as $question)
+                            <li>{{ $question->question_title }}</li> <!-- استبدل "content" باسم العمود الذي يحتوي على نص السؤال -->
+                            @endforeach
+                        </ul>
                     </td>
-                    <td class="p-2">
-                        <div class="bg-blue-50 p-1 rounded text-sm truncate max-w-[300px] mb-1">
-                            1. استشارات تسويقية
-                        </div>
-                        <div class="bg-blue-50 p-1 rounded text-sm truncate max-w-[300px] mb-1">
-                            2. تطوير استراتيجي
-                        </div>
+                    <td>
+                        <ul>
+                            @foreach ($client->chances as $chance)
+                            <li>{{ $chance->case_details }}</li> <!-- استبدل "content" باسم العمود الذي يحتوي على نص السؤال -->
+                            @endforeach
+                        </ul>
                     </td>
                     <td class="p-2">
                         <div class="flex items-center gap-4">
@@ -113,7 +111,7 @@
                             </button>
 
                             <!-- Modal Container (مخفي افتراضيًا) -->
-                            <div id="clientModal{{ $client->id }}" class="hidden fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center">
+                            <div id="clientModal{{ $client->id }}" class="hidden fixed inset-0 bg-gray-500 bg-opacity-50 flex justify-center items-center" style="z-index: 1000;">
                                 <div class="bg-white p-6 rounded-md shadow-lg max-w-4xl w-full">
                                     <!-- محتوى الـ Modal -->
                                     <div id="modalContent{{ $client->id }}">
@@ -138,24 +136,15 @@
                                         <div class="bg-gray-50 p-3 rounded mt-4">
                                             <p class="text-gray-600 mb-2">الأسئلة</p>
                                             <div class="space-y-2">
-                                                <div class="bg-white p-2 rounded shadow-sm">
-                                                    1. كيف يمكنني تحسين أداء شركتي؟
-                                                </div>
-                                                <div class="bg-white p-2 rounded shadow-sm">
-                                                    2. ما هي أفضل طرق التسويق؟
-                                                </div>
+                                                @foreach ($client->questions as $question)
+                                                <li>{{ $question->question_title }}</li> <!-- استبدل "content" باسم العمود الذي يحتوي على نص السؤال -->
+                                                @endforeach
                                             </div>
                                         </div>
                                         <div class="bg-gray-50 p-3 rounded mt-4">
-                                            <p class="text-gray-600 mb-2">الفرص</p>
-                                            <div class="space-y-2">
-                                                <div class="bg-white p-2 rounded shadow-sm">
-                                                    1. استشارات تسويقية
-                                                </div>
-                                                <div class="bg-white p-2 rounded shadow-sm">
-                                                    2. تطوير استراتيجي
-                                                </div>
-                                            </div>
+                                        @foreach ($client->chances as $chance)
+                            <li>{{ $chance->case_details }}</li> <!-- استبدل "content" باسم العمود الذي يحتوي على نص السؤال -->
+                            @endforeach
                                         </div>
                                         <div class="bg-gray-50 p-3 rounded mt-4">
                                             <p class="text-gray-600 mb-1">الحالة</p>

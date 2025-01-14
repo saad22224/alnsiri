@@ -13,8 +13,12 @@ class clientsController extends Controller
      */
     public function index()
     {
-        $clients  = User::paginate(10);
-        return view('admin.clients', compact('clients'));
+        // جلب المستخدمين مع الأسئلة الخاصة بهم
+        $clients = User::with(['questions' ,  'chances'])->paginate(10);
+
+        return view('admin.clients', [
+            'clients' => $clients,
+        ]);
     }
 
     /**
