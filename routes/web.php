@@ -34,6 +34,7 @@ Route::get('/admin/dashboard', function () {
 
 
 Route::post('/admin/login', [AdminLogin::class, 'login'])->name('admin.login');
+Route::post('/admin/logout', [AdminLogin::class, 'logout'])->name('admin.logout');
 
 // clients routes
 Route::prefix('admin')->group(function () {

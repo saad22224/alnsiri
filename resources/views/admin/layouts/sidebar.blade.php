@@ -106,13 +106,19 @@
             <i class="fas fa-lightbulb"></i>
             <span>الفرص</span>
           </a>
-          <a
-            href="/login.html"
+          <form action="{{route('admin.logout')}}" method="post">
+            @csrf
+          <button
+           type="submit"
             class="flex gap-2 items-center hover:bg-gray-700 px-4 py-2 rounded"
           >
             <i class="fas fa-sign-in-alt"></i>
-            <span>تسجيل الدخول</span>
-          </a>
+            <span>تسجيل الخروج</span>
+          </button>
+          </form>
+
+
+          
           <a
             href="/register.html"
             class="flex gap-2 items-center hover:bg-gray-700 px-4 py-2 rounded"
