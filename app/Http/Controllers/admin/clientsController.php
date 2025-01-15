@@ -14,7 +14,7 @@ class clientsController extends Controller
     public function index()
     {
         // جلب المستخدمين مع الأسئلة الخاصة بهم
-        $clients = User::with(['questions' ,  'chances'])->paginate(10);
+        $clients = User::with(['questions',  'chances'])->paginate(10);
 
         return view('admin.clients', [
             'clients' => $clients,
@@ -58,16 +58,21 @@ class clientsController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        $client = User::findOrFail($id);
+        $user = User::findOrFail($id);
         try {
             // التحقق من حالة المستخدم وتحديثها
-            if ($client->status == 1) {
-                $client->update(['status' => 0]); // تغيير الحالة إلى غير نشط
-                return redirect()->back()->with('success', 'User deactivated successfully.');
+            // التحقق من حالة المستخدم وتحديثها
+            if ($user->status == 1) {
+                $user->status = 0;  // تغيير الحالة إلى غير نشط
+                $user->save();
+                session()->flash('success', 'User deactivated successfully.');
             } else {
-                $client->update(['status' => 1]); // تغيير الحالة إلى نشط
-                return redirect()->back()->with('success', 'User activated successfully.');
+                $user->status = 1;  // تغيير الحالة إلى نشط
+                $user->save();
+                session()->flash('success', 'User activated successfully.');
             }
+
+            return redirect()->back();
         } catch (\Exception $e) {
             // في حال وجود خطأ أثناء التحديث
             return redirect()->back()->with('failed', 'Error: ' . $e->getMessage());

@@ -90,7 +90,7 @@
                     </td>
                     <td class="p-2">
                         <div class="flex items-center gap-4">
-                            <form action="{{route('clients.update' , $client->id)}}" method="post">
+                        <form action="{{route('clients.update' , $client->id)}}" method="post">
                                 @csrf
                                 @method('PUT')
                                 <button
@@ -142,9 +142,9 @@
                                             </div>
                                         </div>
                                         <div class="bg-gray-50 p-3 rounded mt-4">
-                                        @foreach ($client->chances as $chance)
-                            <li>{{ $chance->case_details }}</li> <!-- استبدل "content" باسم العمود الذي يحتوي على نص السؤال -->
-                            @endforeach
+                                            @foreach ($client->chances as $chance)
+                                            <li>{{ $chance->case_details }}</li> <!-- استبدل "content" باسم العمود الذي يحتوي على نص السؤال -->
+                                            @endforeach
                                         </div>
                                         <div class="bg-gray-50 p-3 rounded mt-4">
                                             <p class="text-gray-600 mb-1">الحالة</p>

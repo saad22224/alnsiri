@@ -23,7 +23,7 @@ class UserFactory extends Factory
             'phone' => $this->faker->unique()->phoneNumber(),
             'password' => bcrypt('password'), // يمكنك وضع أي قيمة افتراضية أو استخدام bcrypt لتشفير كلمة المرور
             'token' => Str::random(10), // توليد رمز عشوائي
-            'status' => 1, // الحالة الافتراضية
+            'status' => $this->faker->randomElement([0, 1]), // الحالة الافتراضية
             'remember_token' => Str::random(10),
         ];
     }
